@@ -25,5 +25,6 @@ class GradeCalculator1 {
    System.out.printf("You currently have a %.0f", percentage);// float format 0 decimals
    System.out.print("% in CIS385");//prints out final grade
     
+   input.close();
   }
 }
