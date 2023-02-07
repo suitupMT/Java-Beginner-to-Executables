@@ -30,6 +30,7 @@ public class Main {
 			//we created a nameless label with a nameless image, and each individually went
 			//into our ArrayList 
 			deck.add(new JLabel(new ImageIcon("src\\playing card " +i+ ".png")));
+			//adding each label to our frame
 			frame.add(deck.get(i-1));
 		}
 		
