@@ -3,21 +3,20 @@ import java.util.*;
 public class EncryptionProgram {
 	
 	private Scanner scanner;
-	private Random random;
+	
 	
 	private ArrayList<Character> list;
 	private ArrayList<Character> shuffledList;
 	private char character;
-	private String line;
 	private char[] letters;
-	private char[] secretLetters;
+	
 	
 	EncryptionProgram(){
 		
 		scanner = new Scanner(System.in);
-		random = new Random();
-		list = new ArrayList();;
-		shuffledList = new ArrayList();
+		
+		list = new ArrayList<Character>();  //list of all characters in order 
+		shuffledList = new ArrayList<Character>();  //list of new random ordered substitution cipher
 		character = ' ';
 		
 		newKey();
@@ -61,7 +60,7 @@ public class EncryptionProgram {
 			character++;
 		}
 		//takes the array and shuffles its all up in an ArrayList
-		shuffledList = new ArrayList(list);
+		shuffledList = new ArrayList<Character>(list);
 		Collections.shuffle(shuffledList);
 		System.out.println("A new Key has been generated!");
 		
@@ -82,13 +81,54 @@ public class EncryptionProgram {
 		
 	}
 	private void encrypt() { //plain text to cipher text
-		System.out.println("encrypt");
+		System.out.println("Enter a message to be encrypted: ");
+		String message = scanner.nextLine();
+		
+		letters = message.toCharArray();
+		
+		for(int i = 0; i<letters.length; i++) {
+			
+			for(int j=0; j<list.size();j++) {
+				if(letters[i]==list.get(j)) {
+					letters[i]=shuffledList.get(j);
+					break;
+				} 
+			}
+		}
+		System.out.println("Encrypted: ");
+		for(char x : letters) {
+			System.out.print(x);
+		}
+		System.out.println();
 	}
+	
+	
+	
 	private void decrypt() { //cipher text to plain text
-		System.out.println("decrypt");
+		System.out.println("Enter a message to be decrypted: ");
+		String message = scanner.nextLine();
+		
+		letters = message.toCharArray();
+		
+		for(int i = 0; i<letters.length; i++) {
+			
+			for(int j=0; j<shuffledList.size();j++) {
+				if(letters[i]==shuffledList.get(j)) {
+					letters[i]=list.get(j);
+					break;
+				} 
+			}
+		}
+		System.out.println("Decrypted: ");
+		for(char x : letters) {
+			System.out.print(x);
+		}
+		System.out.println();
+		
+		
 	}
 	private void quit() { //exit the program
-		System.out.println("quit");
+		System.out.println("The Program has terminated.");
 		System.exit(0);
 	}
 	
